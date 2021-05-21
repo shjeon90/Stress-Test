@@ -30,3 +30,9 @@ https://github.com/shjeon90/Stress-Test
 예시 (한글이나 공백문자 포함하는 경로):
 >> python stress.py --fpath "C:\한글\공백 문자\data.csv" --conf 90 -V
 ```
+
+Input format
+===
+fpath에 명시되는 CSV 데이터 파일은 반드시 아래와 같은 양식이어야 함.
+
+![fig1](./images/input.PNG)
