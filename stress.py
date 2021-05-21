@@ -79,7 +79,7 @@ class LinearRegression:
         X = X[:, 0]
         X_mean = np.mean(X)
 
-        conf = np.sqrt(self.sigma * (1. / len(X) +
+        conf = t * np.sqrt(self.sigma * (1. / len(X) +
                       (np.power(X - X_mean, 2) / np.sum(np.power(X - X_mean, 2)))))
         lower = pred - conf
         upper = pred + conf
