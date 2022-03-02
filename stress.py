@@ -122,7 +122,7 @@ def log_scale(data):
 
     return data
 
-def plot(data, model, conf):
+def plot(data, model, conf, fn):
     print('[*] plotting...')
 
     min_x, max_x = data['log_x'].min(), data['log_x'].max()
@@ -140,6 +140,7 @@ def plot(data, model, conf):
     plt.ylabel('Stress (MPa)')
     plt.xlabel('Time (h)')
     plt.legend()
+    plt.savefig(f'{fn}-plot.png')
     fig.show()
 
 def calc_F(model, data):
@@ -179,8 +180,18 @@ def main(fpath, conf, is_visual):
     print('[*] statistics (F):', F)
     print()
 
+    pd_data = {
+        'gradient': [w[0, 0]],
+        'bias': [w[1, 0]],
+        'statistics (F)': [F]
+    }
+    fn = pathlib.Path(fpath).stem
+    pd_data = pd.DataFrame(data=pd_data).T
+    pd_data.to_excel(f'{fn}-output.xlsx', header=False)
+
+    plot(data, model, conf, fn)
+
     if is_visual:
-        plot(data, model, conf)
         plt.show()
 
 if __name__ == '__main__':
